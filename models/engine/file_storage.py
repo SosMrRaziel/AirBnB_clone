@@ -9,11 +9,13 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        self.__objects = {f"{obj.__class__.__name__}.{obj.id}": obj}
+        key = f"{obj.__class__.__name__}.{obj.id}"
+        self.__objects[key] = obj
 
     def save(self):
+        what_to_save = {key: obj.to_dict() for key, obj in self.__objects.items()}
         with open(self.__file_path, 'w') as f:
-            json.dump(self.__objects, f)
+            json.dump(what_to_save, f)
 
     def reload(self):
         try:
