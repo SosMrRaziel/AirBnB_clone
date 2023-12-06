@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
+
 """define BaseModl class"""
 
 
 class BaseModel:
     """BaseModel class that defines common
             attributes and methods for other classes"""
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Initialize a new BaseModel instance
 
         Attributes:
@@ -15,9 +16,17 @@ class BaseModel:
             created_at (datetime): the creation date and time of the instance
             updated_at (datetime): the last update date and time of th instance
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if kwargs:
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    if key in ('created_at', 'updated_at'):
+                        # Convert string to datetime object
+                        value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = self.updated_at = datetime.now()
+        
 
     def __str__(self):
         """Return a string representation of the instance"""
