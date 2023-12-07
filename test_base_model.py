@@ -3,6 +3,7 @@ from models import storage
 from models.base_model import BaseModel
 from models.user import User
 
+
 all_objs = storage.all()
 print("-- Reloaded objects --")
 for obj_id in all_objs.keys():
@@ -24,3 +25,4 @@ my_user2.first_name = "John"
 my_user2.email = "airbnb2@mail.com"
 my_user2.password = "root"
 my_user2.save()
+print(my_user2)
