@@ -2,6 +2,7 @@
 from models.base_model import BaseModel as BS
 """class that inherit from BaseModel"""
 
+
 class Review(BS):
     """class that inherit from BaseModel"""
 
