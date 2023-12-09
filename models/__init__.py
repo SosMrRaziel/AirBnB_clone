@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-filestorage for our application
+create a unique FileStorage for AirBnB application
 """
 from models.engine.file_storage import FileStorage
 
