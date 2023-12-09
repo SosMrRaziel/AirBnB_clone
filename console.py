@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""a command prompt to execute commands"""
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -8,8 +9,6 @@ from models.state import State
 from models.amenity import Amenity
 from models.city import City
 from models import storage
-# from models.base_model import BaseModel as BM
-"""a command prompt to execute commands"""
 
 
 class HBNBCommand(cmd.Cmd):
