@@ -1,78 +1,59 @@
 #!/usr/bin/python3
 """
-defines the basemodel module
+defines storage module
 """
-import uuid
-from datetime import datetime
-import models
+import json
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
-class BaseModel:
-    """ The BaseModel class defines common attributes and methods that can be
-    inherited by other classes in the application.
-
-    Attributes:
-        id (str): A universally unique identifier (UUID) for the object.
-        created_at (datetime): indicating the object's creation time.
-        updated_at (datetime): indicating the object's last update time.
-
-    Methods:
-        __init__: Initializes a new instance of the BaseModel class.
-        __str__: Returns a string representation of the object.
-        save: Updates the 'updated_at' attribute to the current timestamp.
-        to_dict: Converts the object to a dictionary format.
+class FileStorage:
+    """
+     serializes instances to a JSON file and deserialize
+     file_path: path to the json file
+     objects: dic that stores all objects
     """
 
-    def __init__(self, *args, **kwargs):
-        """
-        Initializes a new instance of the BaseModel class.
+    __file_path = "file.json"
+    __objects = {}
 
-        Args:
-            *args: Variable-length argument list.
-            **kwargs: Arbitrary keyword arguments.
+    def all(self):
         """
-        if kwargs:
-            for key, value in kwargs.items():
-                if key != "__class__":
-                    if key == "created_at" or key == "updated_at":
-                        date_format = "%Y-%m-%dT%H:%M:%S.%f"
-                        self.__dict__[key] = datetime.strptime(
-                                value, date_format)
-                    else:
-                        self.__dict__[key] = value
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-            models.storage.new(self)
+        returns the dictionary __objects
+        """
+        return self.__objects
 
-    def __str__(self):
+    def new(self, obj):
         """
-        Returns a string representation of the object.
-
-        Returns:
-            str: A string containing the class name, id
+        sets in __objects the obj with key <obj class name>.id
         """
-        return "[{}] ({}) {}".format(
-                self.__class__.__name__, self.id, self.__dict__)
+        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """
-        Updates the 'updated_at' attribute to the current timestamp.
+        serializes __objects to the JSON file (path: __file_path)
         """
+        data_to_save = {key: obj.to_dict()
+                        for key, obj in self.__objects.items()}
 
-        self.updated_at = datetime.now()
-        models.storage.save()
+        with open(self.__file_path, 'w', encoding="utf-8") as jfile:
+            json.dump(data_to_save, jfile)
 
-    def to_dict(self):
+    def reload(self):
         """
-        Converts the object to a dictionary format.
-
-        Returns:
-            dict: A dictionary representation of the object.
+        deserializes the JSON file to __objects
         """
-        obj = self.__dict__.copy()
-        obj['__class__'] = self.__class__.__name__
-        obj['created_at'] = self.created_at.isoformat()
-        obj['updated_at'] = self.updated_at.isoformat()
-        return obj
+        try:
+            with open(self.__file_path, 'r', encoding="utf-8") as pfile:
+                data_loaded = json.load(pfile)
+
+                for key, obj_data in data_loaded.items():
+                    self.__objects[key] = eval(obj_data["__class__"])(
+                        **obj_data)
+        except FileNotFoundError:
+            pass
