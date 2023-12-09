@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 import uuid
 from datetime import datetime
 import models
@@ -9,6 +10,7 @@ import models
 class BaseModel:
     """BaseModel class that defines common
             attributes and methods for other classes"""
+
     def __init__(self, *args, **kwargs):
         """Initialize a new BaseModel instance
 
@@ -17,11 +19,11 @@ class BaseModel:
             created_at (datetime): the creation date and time of the instance
             updated_at (datetime): the last update date and time of th instance
         """
+
         if kwargs:
             for key, value in kwargs.items():
                 if key != '__class__':
                     if key in ('created_at', 'updated_at'):
-                        # Convert string to datetime object
                         value = datetime.strptime(value,
                                                   '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, value)
@@ -32,11 +34,13 @@ class BaseModel:
 
     def __str__(self):
         """Return a string representation of the instance"""
+
         return "[{}] ({}) {}".format(
                     self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """Update the updated_at attribute with the current datetime"""
+
         self.updated_at = datetime.now()
         models.storage.save()
 
@@ -48,6 +52,7 @@ class BaseModel:
                 with the class name under the key "__class__" and the datetime
                 objects converted to ISO format strings
         """
+
         dic = self.__dict__.copy()
         dic["__class__"] = self.__class__.__name__
         dic["created_at"] = self.created_at.isoformat()

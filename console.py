@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""a command prompt to execute commands"""
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -8,10 +9,10 @@ from models.state import State
 from models.amenity import Amenity
 from models.city import City
 from models import storage
-# from models.base_model import BaseModel as BM
 
 
 class HBNBCommand(cmd.Cmd):
+    """a class that behave like a command prompt"""
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
