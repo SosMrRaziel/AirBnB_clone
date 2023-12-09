@@ -1,26 +1,53 @@
-from models.engine.file_storage import FileStorage
-from models.base_model import BaseModel as BM
+import json
+from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.amenity import Amenity
+from models.city import City
 
-# Create an instance of the FileStorage class
-fs = FileStorage()
 
-# Create two instances of the BaseModel class
-bm1 = BM()
-bm2 = BM()
+class FileStorage:
+    """
+    This class is responsible for storing
+    and retrieving objects to and from a JSON file.
+    """
+    __file_path = "file.json"
+    __objects = {}
 
-# Add the two instances to the FileStorage object
-fs.new(bm1)
-fs.new(bm2)
+    def all(self):
+        """
+        Returns the dictionary __objects.
+        """
+        return self.__objects
 
-# Save the FileStorage object to the JSON file
-fs.save()
+    def new(self, obj):
+        """
+        Sets in __objects the obj with key <obj class name>.id
+        """
+        key = f"{obj.__class__.__name__}.{obj.id}"
+        self.__objects[key] = obj
 
-# Print the contents of the JSON file
-with open("file.json", "r") as f:
-    print(f.read())
+    def save(self):
+        """
+        Serializes __objects to the JSON file (path: __file_path).
+        """
+        what_to_save = {key: obj.to_dict() for key, obj
+                        in self.__objects.items()}
+        with open(self.__file_path, 'w') as f:
+            json.dump(what_to_save, f)
 
-# Reload the FileStorage object from the JSON file
-fs.reload()
+    def reload(self):
+        """
+        Deserializes the JSON file to __objects
+            (only if the JSON file (__file_path) exists).
+        """
+        try:
+            with open(self.__file_path, 'r') as f:
+                data = json.load(f)
 
-# Print the dictionary of objects in the FileStorage object
-print(fs.all())
+                for key, obj in data.items():
+                    self.__objects[key] = eval(obj["__class__"])(**obj)
+        except FileNotFoundError:
+            pass
