@@ -10,4 +10,5 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
+    """Tests BaseModel class"""
     pass
