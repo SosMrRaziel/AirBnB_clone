@@ -9,9 +9,11 @@ from models.amenity import Amenity
 from models.city import City
 from models import storage
 # from models.base_model import BaseModel as BM
+"""a command prompt to execute commands"""
 
 
 class HBNBCommand(cmd.Cmd):
+    """a class that behave like a command prompt"""
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
