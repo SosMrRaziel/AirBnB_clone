@@ -1,11 +1,18 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel as BS
-"""class that inherit from BaseModel"""
+"""
+define the user's module
+"""
+from models.base_model import BaseModel
 
 
-class User(BS):
-    """use class User that inherits from BaseModel"""
-
+class User(BaseModel):
+    """class named User
+    attributes:
+    email(str):users email
+    password(str): users password
+    first name(str): users first name
+    last name(str): users last name
+    """
     email = ""
     password = ""
     first_name = ""
