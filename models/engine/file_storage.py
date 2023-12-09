@@ -10,7 +10,8 @@ from models.city import City
 
 class FileStorage:
     """
-    This class is responsible for storing and retrieving objects to and from a JSON file.
+    This class is responsible for storing
+    and retrieving objects to and from a JSON file.
     """
     __file_path = "file.json"
     __objects = {}
@@ -39,7 +40,8 @@ class FileStorage:
 
     def reload(self):
         """
-        Deserializes the JSON file to __objects (only if the JSON file (__file_path) exists).
+        Deserializes the JSON file to __objects
+            (only if the JSON file (__file_path) exists).
         """
         try:
             with open(self.__file_path, 'r') as f:
