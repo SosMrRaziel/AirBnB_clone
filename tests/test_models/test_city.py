@@ -2,6 +2,7 @@ import unittest
 from models.base_model import BaseModel as BS
 from models.city import City
 
+
 class TestCity(unittest.TestCase):
     """A class to test the City class.
 
@@ -28,6 +29,7 @@ class TestCity(unittest.TestCase):
         city.state_id = "NY"
         self.assertIsInstance(city.name, str)
         self.assertIsInstance(city.state_id, str)
+
 
 if __name__ == '__main__':
     unittest.main()

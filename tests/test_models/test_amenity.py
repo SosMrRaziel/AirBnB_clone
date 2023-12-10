@@ -12,22 +12,26 @@ class TestAmenity(unittest.TestCase):
     def test_init(self):
         """Test the initialization of an Amenity object."""
 
-        amenity = Amenity(name="pool")  # Create an Amenity object with a name attribute
+        amenity = Amenity(name="pool")  # Create an Amenity object with a
+        # name attribute
 
-        
-        self.assertEqual(amenity.name, "pool")  # Assert that the name attribute is equal to "pool"
+        self.assertEqual(amenity.name, "pool")  # Assert that the
+        # name attribute is equal to "pool"
 
         # Assert that the amenity is an instance of Amenity and BaseModel
         self.assertIsInstance(amenity, Amenity)
         self.assertIsInstance(amenity, BS)
 
-    # Write a test method that checks the string representation of an Amenity object
+    # Write a test method that checks the string representation of an
+    # Amenity object
     def test_str(self):
         """Test the string representation of an Amenity object."""
-        
-        amenity = Amenity(name="wifi")  # Create an Amenity object with a name attribute
 
-        # Assert that the string representation of the amenity is in the expected format
+        amenity = Amenity(name="wifi")  # Create an Amenity object with a name
+        # attribute
+
+        # Assert that the string representation of the amenity is in the
+        # expected format
         if hasattr(amenity, "id"):
             print(amenity.id)
         else:

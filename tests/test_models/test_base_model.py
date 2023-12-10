@@ -2,6 +2,7 @@ import unittest
 from models.base_model import BaseModel as BS
 from datetime import datetime
 
+
 class TestBaseModel(unittest.TestCase):
     """Test class for BS"""
 
@@ -11,7 +12,8 @@ class TestBaseModel(unittest.TestCase):
         bm = BS()
         # Check if the id attribute is a string
         self.assertIsInstance(bm.id, str)
-        # Check if the created_at and updated_at attributes are datetime objects
+        # Check if the created_at and updated_at attributes are
+        # datetime objects
         self.assertIsInstance(bm.created_at, datetime)
         self.assertIsInstance(bm.updated_at, datetime)
 
@@ -47,6 +49,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(dic["id"], bm.id)
         self.assertEqual(dic["created_at"], bm.created_at.isoformat())
         self.assertEqual(dic["updated_at"], bm.updated_at.isoformat())
+
 
 if __name__ == "__main__":
     unittest.main()
