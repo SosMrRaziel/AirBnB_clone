@@ -1,5 +1,6 @@
 import unittest
 from models.base_model import BaseModel as BS
+from models.amenity import Amenity
 from models.city import City
 
 
