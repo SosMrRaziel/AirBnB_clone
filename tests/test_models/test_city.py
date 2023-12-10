@@ -1,7 +1,7 @@
 import unittest
 from models.base_model import BaseModel as BS
-from models.amenity import Amenity
 from models.city import City
+from datetime import datetime
 
 
 class TestCity(unittest.TestCase):
@@ -30,6 +30,15 @@ class TestCity(unittest.TestCase):
         city.state_id = "NY"
         self.assertIsInstance(city.name, str)
         self.assertIsInstance(city.state_id, str)
+
+    def test_instance(self):
+        self.assertIsInstance(City(), BS)
+        self.assertIs(City, type(City()))
+        self.assertIsInstance(City().id, str)
+        self.assertIsInstance(City().created_at, datetime)
+        self.assertIsInstance(City().updated_at, datetime)
+        self.assertIsInstance(City().state_id, str)
+        self.assertIsInstance(City().name, str)
 
 
 if __name__ == '__main__':
