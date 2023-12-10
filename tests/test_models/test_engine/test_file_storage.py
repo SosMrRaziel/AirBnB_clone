@@ -6,6 +6,7 @@ from models.base_model import BaseModel
 from models.user import User
 """FileStorage test"""
 
+
 class TestFilesStorage(unittest.TestCase):
     """a testing of all possible cases .. not all but most of them"""
 
@@ -13,7 +14,7 @@ class TestFilesStorage(unittest.TestCase):
         self.assertIs(FileStorage, type(FileStorage()))
         self.assertIsInstance(FileStorage.__objects, dict)
         self.assertIsInstance(FileStorage.__file_path, str)
-    
+
     def test_NewStor(self):
         models.storage.new(BaseModel())
         models.storage.new(User())
