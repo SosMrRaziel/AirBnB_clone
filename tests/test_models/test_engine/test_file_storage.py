@@ -28,5 +28,10 @@ class TestFilesStorage(unittest.TestCase):
         """general test"""
         self.assertEqual(type(models.storage.all()), dict)
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_user_save(self):
+        len = len(FileStorage.all())
+        BaseModel().save()
+        self.assertEqual(len(FileStorage().all()), len + 1)
+        self.assertNotEqual(len(FileStorage().all()), len + 2)
+        User.save()
+        self.assertEqual(len(FileStorage().all()), len + 2)
