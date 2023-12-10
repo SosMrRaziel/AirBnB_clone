@@ -30,6 +30,10 @@ class TestReview(unittest.TestCase):
         self.assertIsInstance(review.user_id, str)
         self.assertIsInstance(review.text, str)
 
+    def test_StrRep(self):
+        Op = "[Review] ({}) {}".format(Review().id, Review().__dict__)
+        self.assertEqual(Review().__str__(), Op)
+
 
 if __name__ == '__main__':
     unittest.main()
