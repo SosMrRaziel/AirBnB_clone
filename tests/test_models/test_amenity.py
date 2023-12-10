@@ -1,7 +1,8 @@
 # Import the unittest module
 import unittest
-from models.base_model import BaseModel as BS
+from models.base_model import BaseModel
 from models.amenity import Amenity
+from datetime import datetime
 
 """Create a test class that inherits from unittest.TestCase"""
 
@@ -20,7 +21,12 @@ class TestAmenity(unittest.TestCase):
 
         # Assert that the amenity is an instance of Amenity and BaseModel
         self.assertIsInstance(amenity, Amenity)
-        self.assertIsInstance(amenity, BS)
+        self.assertIsInstance(amenity, BaseModel)
+
+    def test_ID(self):
+        amnone = Amenity()
+        amntwo = Amenity()
+        self.assertNotEqual(amnone.id, amntwo.id)
 
     # Write a test method that checks the string representation of an
     # Amenity object
@@ -36,6 +42,14 @@ class TestAmenity(unittest.TestCase):
             print(amenity.id)
         else:
             print("No id attribute found")
+
+    def test_instance(self):
+        self.assertIsInstance(Amenity(), BaseModel)
+        self.assertIs(Amenity, type(Amenity()))
+        self.assertIsInstance(Amenity().id, str)
+        self.assertIsInstance(Amenity().created_at, datetime)
+        self.assertIsInstance(Amenity().updated_at, datetime)
+        self.assertIsInstance(Amenity().name, str)
 
 
 if __name__ == "__main__":
