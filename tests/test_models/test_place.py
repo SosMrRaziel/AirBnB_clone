@@ -26,7 +26,7 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(hasattr(place, "longitude"))
         self.assertTrue(hasattr(place, "amenity_ids"))
 
-    def test_place_attributes_are_correct_types(self):
+    def test_instance(self):
         # check that Place attributes have the correct types
         place = Place()
         place.name = "My place"
@@ -56,6 +56,10 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(place.latitude, float)
         self.assertIsInstance(place.longitude, float)
         self.assertIsInstance(place.amenity_ids, list)
+
+    def test_StrRep(self):
+        Op = "[place] ({}) {}".format(Place().id, Place().__dict__)
+        self.assertEqual(Place().__str__(), Op)
 
 
 if __name__ == '__main__':
