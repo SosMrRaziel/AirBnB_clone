@@ -27,3 +27,6 @@ class TestFilesStorage(unittest.TestCase):
     def test_AllStorage(self):
         """general test"""
         self.assertEqual(type(models.storage.all()), dict)
+
+if __name__ == '__main__':
+    unittest.main()
