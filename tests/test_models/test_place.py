@@ -1,6 +1,7 @@
 import unittest
 from models.base_model import BaseModel as BS
 from models.place import Place
+from datetime import datetime
 
 
 class TestPlace(unittest.TestCase):
@@ -39,6 +40,11 @@ class TestPlace(unittest.TestCase):
         place.latitude = 37.5
         place.longitude = -122.4
         place.amenity_ids = ["789", "abc"]
+        self.assertIs(Place, type(place))
+        self.assertIsInstance(place, BS)
+        self.assertIsInstance(place.id, str)
+        self.assertIsInstance(place.created_at, datetime)
+        self.assertIsInstance(place.updated_at, datetime)
         self.assertIsInstance(place.name, str)
         self.assertIsInstance(place.city_id, str)
         self.assertIsInstance(place.user_id, str)
