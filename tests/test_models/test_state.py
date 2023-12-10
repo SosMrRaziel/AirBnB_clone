@@ -24,15 +24,11 @@ class TestState(unittest.TestCase):
     def test_isntance(self):
         # check that Review attributes have the correct types
         state = State()
-        state.place_id = "123"
-        state.user_id = "456"
-        state.text = "This place is awesome"
-        self.assertIsInstance(state.place_id, str)
+        self.assertIsInstance(State, BS)
         self.assertIsInstance(state.id, str)
         self.assertIsInstance(state.created_at, datetime)
         self.assertIsInstance(state.updated_at, datetime)
-        self.assertIsInstance(state.user_id, str)
-        self.assertIsInstance(state.text, str)
+        self.assertIsInstance(state.name, str)
 
 
 if __name__ == '__main__':
