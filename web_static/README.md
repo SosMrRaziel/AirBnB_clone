@@ -22,4 +22,4 @@ Now that you have a command interpreter for managing your AirBnB objects, it’s
 - What are Box properties in CSS
 
 ## more info:
-for more: [I'm a link](https://learn.shayhowe.com/html-css/)
+for more: [I'm a link](https://learn.shayhowe.com/html-css/){:target="_blank"}
