@@ -14,10 +14,10 @@
     width: 25%;
     text-align: left;
     float: left;
-    margin-left: 30px;
     display: flex;
     flex-direction: column;
     justify-content: bottom;
+    position: relative;
 }
 
 .locations {
@@ -29,6 +29,7 @@ h3 {
     font-weight: 600;
     padding: 0;
     margin-bottom: 0;
+    margin-left: 30px;
     
 }
 
@@ -37,7 +38,7 @@ h4 {
     font-size: 14px;
     padding: 0;
     margin-top: 0;
-    /* margin-left: 10px; */
+    margin-left: 30px;
 }
 
 button {
@@ -58,13 +59,15 @@ button:hover {
 }
 
 .popover {
-    /* display: none; */
+    display: none;
     background-color: #FAFAFA;
     width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     list-style: none;
     padding: 0;
+    position: absolute;
+    top: 100%;
 }
 
 .popover li {
@@ -76,8 +79,9 @@ button:hover {
 .popover h2 {
     font-size: 16px;
     margin: 0;
+    margin-top: 15px;
  }
 
-/* .locations:hover .popover, .amenities:hover .popover{
+.locations:hover .popover, .amenities:hover .popover{
     display: block;
-}  */
+} 
